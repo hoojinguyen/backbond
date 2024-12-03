@@ -1,7 +1,8 @@
-import {defineConfig} from 'vite';
+import {vitePlugin as remix} from '@remix-run/dev';
 import {hydrogen} from '@shopify/hydrogen/vite';
 import {oxygen} from '@shopify/mini-oxygen/vite';
-import {vitePlugin as remix} from '@remix-run/dev';
+import tailwindcss from 'tailwindcss';
+import {defineConfig} from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
@@ -18,6 +19,11 @@ export default defineConfig({
     }),
     tsconfigPaths(),
   ],
+  css: {
+    postcss: {
+      plugins: [tailwindcss()],
+    },
+  },
   build: {
     // Allow a strict Content-Security-Policy
     // withtout inlining assets as base64:
@@ -35,7 +41,19 @@ export default defineConfig({
        * Include 'example-dep' in the array below.
        * @see https://vitejs.dev/config/dep-optimization-options
        */
-      include: [],
+      include: [
+        'jw-paginate',
+        'screenfull',
+        'nano-css/addon/vcssom/cssToTree',
+        'nano-css/addon/vcssom',
+        'nano-css/addon/cssom',
+        'nano-css',
+        'copy-to-clipboard',
+        'js-cookie',
+        'fast-deep-equal/react',
+        'classnames',
+        'react-use',
+      ],
     },
   },
 });
